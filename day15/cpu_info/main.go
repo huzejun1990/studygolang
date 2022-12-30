@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"github.com/shirou/gopsutil/cpu"
-	"github.com/shirou/gopsutil/load"
 	"time"
 )
 
@@ -27,5 +26,5 @@ func getCpuInfo() {
 }
 
 func main() {
-	//getCpuInfo()
+	getCpuInfo()
 }
