@@ -22,7 +22,13 @@ func main() {
 
 	// put
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	_, err = cli.Put(ctx, "s4", "很好")
+	str := `[{"path":"d:/logs/s5.log","topic":"s5_log"},{"path":"e:/logs/web.log","topic":"web_log"}]`
+	//str := `[{"path":"d:/logs/s5.log","topic":"s5_log"},{"path":"e:/logs/web.log","topic":"web_log"},{"path":"f:/logs/naza.log","topic":"naza_log"}]`
+	//str := `[{"path":"d:/logs/s5.log","topic":"s5_log"},{"path":"e:/logs/web.log","topic":"web_log"},{"path":"f:/logs/naza.log","topic":"naza_log"},{"path":"f:/logs/naza3.log","topic":"efg_log"}]`
+	//_, err = cli.Put(ctx, "collect_log_conf", str)
+	_, err = cli.Put(ctx, "collect_log_192.168.32.110_conf", str)
+	//_, err = cli.Put(ctx, "collect_log_conf", "很好") collect_log_192.168.32.110_conf
+	//_, err = cli.Put(ctx, "s4", "很好")
 	if err != nil {
 		fmt.Printf("put to etcd failed:err:%v", err)
 		return
@@ -31,7 +37,9 @@ func main() {
 
 	// get
 	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
-	gr, err := cli.Get(ctx, "s4")
+	//gr, err := cli.Get(ctx, "s4") // collect_log_conf
+	//gr, err := cli.Get(ctx, "collect_log_conf") // collect_log_conf
+	gr, err := cli.Get(ctx, "collect_log_192.168.32.110_conf") // collect_log_conf
 	if err != nil {
 		fmt.Printf("get from etcd failed, err:%v", err)
 		return
